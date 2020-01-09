@@ -10,6 +10,7 @@ type TypeMeta struct {
 type ObjectMeta struct {
 	Name        string            `yaml:"name"`
 	Labels      map[string]string `yaml:"labels"`
+	Annotations map[string]string `yaml:"annotations,omitempty"`
 }
 
 type LabelSelector struct {
@@ -20,7 +21,7 @@ type PodSpec struct {
 	Volumes          []Volume               `yaml:"volumes"`
 	InitContainers   []Container            `yaml:"initContainers"`
 	Containers       []Container            `yaml:"containers"`
-	ImagePullSecrets []LocalObjectReference `yaml:"imagePullSecrets"`
+	ImagePullSecrets []LocalObjectReference `yaml:"imagePullSecrets,omitempty"`
 }
 
 type PodTemplate struct {
@@ -44,14 +45,14 @@ type Container struct {
 	Name            string               `yaml:"name"`
 	Image           string               `yaml:"image"`
 	Command         []string             `yaml:"command"`
-	Args            []string             `yaml:"args"`
-	WorkingDir      string               `yaml:"workingDir"`
-	Env             []EnvVar             `yaml:"env"`
-	EnvFrom         []EnvFromSource      `yaml:"envFrom"`
-	ImagePullPolicy PullPolicy           `yaml:"imagePullPolicy"`
+	Args            []string             `yaml:"args,omitempty"`
+	WorkingDir      string               `yaml:"workingDir,omitempty"`
+	Env             []EnvVar             `yaml:"env,omitempty"`
+	EnvFrom         []EnvFromSource      `yaml:"envFrom,omitempty"`
+	ImagePullPolicy PullPolicy           `yaml:"imagePullPolicy,omitempty"`
 	Ports           []ContainerPort      `yaml:"ports"`
-	Resources       ResourceRequirements `yaml:"resources"`
-	VolumeMounts    []VolumeMount        `yaml:"volumeMounts"`
+	Resources       ResourceRequirements `yaml:"resources,omitempty"`
+	VolumeMounts    []VolumeMount        `yaml:"volumeMounts,omitempty"`
 }
 
 type EnvVar struct {
