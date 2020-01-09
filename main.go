@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/kuyio/kstub/commands"
+	"github.com/DavidZisky/kstub/commands"
 )
 
 func main() {

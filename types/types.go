@@ -10,7 +10,6 @@ type TypeMeta struct {
 type ObjectMeta struct {
 	Name        string            `yaml:"name"`
 	Labels      map[string]string `yaml:"labels"`
-	Annotations map[string]string `yaml:"annotations"`
 }
 
 type LabelSelector struct {

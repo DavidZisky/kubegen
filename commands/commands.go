@@ -27,7 +27,7 @@ var (
 	// RootCmd defineds the entry point command for the CLI
 	RootCmd = &cobra.Command{
 		Use:               "kstub",
-		Short:             "KStub is a very fast generator for Kubernetes manifests",
+		Short:             "KStub is a Kubernetes manifests generator",
 		Long:              ``,
 		SilenceErrors:     true,
 		SilenceUsage:      true,

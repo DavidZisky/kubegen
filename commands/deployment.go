@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	. "github.com/kuyio/kstub/types"
+	. "github.com/DavidZisky/types"
 	"github.com/spf13/cobra"
 	yaml "gopkg.in/yaml.v2"
 )
@@ -13,7 +13,7 @@ var (
 	// Command
 	deploymentCmd = &cobra.Command{
 		Use:   "deployment",
-		Short: "Generate a deployment manifest",
+		Short: "Generate a deployment manifesto",
 		Long:  ``,
 		Run:   deployment,
 	}
