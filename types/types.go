@@ -18,8 +18,8 @@ type LabelSelector struct {
 }
 
 type PodSpec struct {
-	Volumes          []Volume               `yaml:"volumes"`
-	InitContainers   []Container            `yaml:"initContainers"`
+	Volumes          []Volume               `yaml:"volumes,omitempty"`
+	InitContainers   []Container            `yaml:"initContainers,omitempty"`
 	Containers       []Container            `yaml:"containers"`
 	ImagePullSecrets []LocalObjectReference `yaml:"imagePullSecrets,omitempty"`
 }
