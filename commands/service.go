@@ -20,10 +20,8 @@ var (
 
 func service(cmd *cobra.Command, args []string) {
 
-	//fmt.Printf("%v", port)
 	if targetport == 0 {
 		targetport = port
-		fmt.Printf("%v", targetport)
 	}
 
 	d := Service{
