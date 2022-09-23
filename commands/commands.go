@@ -27,8 +27,8 @@ var (
 	// RootCmd defineds the entry point command for the CLI
 	RootCmd = &cobra.Command{
 		Use:               "kubegen",
-		Short:             "simple Kubernetes manifests generator",
-		Long:              ``,
+		Short:             "kubegen - a simple Kubernetes manifests generator",
+		Long:              "",
 		SilenceErrors:     true,
 		SilenceUsage:      true,
 		PersistentPreRunE: readConfig,
@@ -104,8 +104,8 @@ func init() {
 	RootCmd.PersistentFlags().String("log-level", logLevel, "Output level of logs (TRACE, DEBUG, INFO, WARN, ERROR, FATAL)")
 
 	// Local flags
-	RootCmd.Flags().StringVar(&config, "config", "", "/path/to/config.yml")
-	RootCmd.Flags().BoolVarP(&showVers, "version", "v", false, "Display the current version of this CLI")
+	//RootCmd.Flags().StringVar(&config, "config", "", "/path/to/config.yml")
+	//RootCmd.Flags().BoolVarP(&showVers, "version", "v", false, "Display the current version of this CLI")
 
 	// Commands
 	RootCmd.AddCommand(versionCmd)
