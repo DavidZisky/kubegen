@@ -9,24 +9,23 @@ Run `go install github.com/DavidZisky/kubegen`
 ## Usage
 
 ```sh
-kubegen is a very fast generator for Kubernetes manifests
+kubegen - a simple Kubernetes manifests generator
 
 Usage:
-  kubegen [flags] command
+  kubegen [flags]
+  kubegen [command]
 
 Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  deployment  Generate a deployment manifesto
   help        Help about any command
+  ingress     Generate a ingress manifest
+  service     Generate a service manifest
   version     Print the version number of kubegen
 
-  deployment  Generate a deployment manifest
-  service     Generate a service manifest
-  ingress     Generate a ingress manifest
-
 Flags:
-      --config string      /path/to/config.yml
   -h, --help               help for kubegen
       --log-level string   Output level of logs (TRACE, DEBUG, INFO, WARN, ERROR, FATAL) (default "INFO")
-  -v, --version            Display the current version of this CLI
 
 Use "kubegen [command] --help" for more information about a command.
 ```
@@ -34,7 +33,7 @@ Use "kubegen [command] --help" for more information about a command.
 Most flags can be used across commands. For instance to generate a stack of manifests for an app called "echo", one could run:
 
 ```sh
-kubegen --name echo --port 80 deployment
-kubegen --name echo --port 80 service
-kubegen --name echo --port 80 ingress
+kubegen deployment --name echo --port 80
+kubegen service --name echo --port 80
+kubegen ingress --name echo --port 80 
 ```
