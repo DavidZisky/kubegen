@@ -17,6 +17,8 @@ var (
 
 	name     		string // Deployment Name
 	replicas 		int32  // Number of Desired Pod Replicas
+	servicename string // Name of the service
+	ingressclass string // IngressClassName
 	port     		int32  // Container Port
 	targetport  int32  // Container Target Port
 	image    		string // Container Image

@@ -132,7 +132,7 @@ type IngressTLS struct {
 // IngressRule represents the rules mapping the paths under a specified host to
 // the related backend services.
 type IngressRule struct {
-	Host             string `yaml:"host"`
+	//Host             string `yaml:"host"`
 	IngressRuleValue `yaml:",inline"`
 }
 
@@ -150,13 +150,22 @@ type HTTPIngressRuleValue struct {
 // the path are forwarded to the backend.
 type HTTPIngressPath struct {
 	Path    string
+	PathType string `yaml:"pathType"`
 	Backend IngressBackend
 }
 
-// IngressBackend describes all endpoints for a given service and port.
+//
 type IngressBackend struct {
-	ServiceName string `yaml:"serviceName"`
-	ServicePort int32  `yaml:"servicePort"`
+	Service BackendService
+}
+
+type BackendService struct {
+	ServiceName string `yaml:"name"`
+	Port IngressServicePort
+}
+
+type IngressServicePort struct {
+	Number  int32  `yaml:"number"`
 }
 
 // EnvVarSource represents a source for the value of an EnvVar.

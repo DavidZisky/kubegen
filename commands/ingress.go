@@ -20,36 +20,47 @@ var (
 
 func ingress(cmd *cobra.Command, args []string) {
 
+	if servicename == "servicename" {
+		servicename = name + "-service"
+	}
+
 	d := Ingress{
 		TypeMeta: TypeMeta{
-			APIVersion: "extensions/v1beta1",
+			APIVersion: "networking.k8s.io/v1",
 			Kind:       "Ingress",
 		},
 		ObjectMeta: ObjectMeta{
 			Name: name + "-ingress",
 			Annotations: map[string]string{
 				"nginx.ingress.kubernetes.io/rewrite-target": "/",
-				"kubernetes.io/ingress.class":                "nginx",
 			},
 		},
 		Spec: IngressSpec{
+			/*
 			TLS: []IngressTLS{
 				IngressTLS{
 					Hosts:      []string{"foo.bar.com"},
 					SecretName: name + "-tls-secret",
 				},
 			},
+			*/
+			IngressClass: ingressclass,
 			Rules: []IngressRule{
 				IngressRule{
-					Host: "foo.bar.com",
+					//Host: "foo.bar.com",
 					IngressRuleValue: IngressRuleValue{
 						HTTP: &HTTPIngressRuleValue{
 							Paths: []HTTPIngressPath{
 								HTTPIngressPath{
-									Path: "/foo",
+									Path: "/",
+									PathType: "Prefix",
 									Backend: IngressBackend{
-										ServiceName: name + "-service",
-										ServicePort: port,
+											Service: BackendService{
+												ServiceName: servicename,
+												Port: IngressServicePort{
+													Number: port,
+												},
+											},
 									},
 								},
 							},
@@ -65,11 +76,13 @@ func ingress(cmd *cobra.Command, args []string) {
 		log.Fatalf("error: %v", err)
 	}
 
-	fmt.Printf("---\n%v\n", string(s))
+	fmt.Printf("---\n%v", string(s))
 }
 
 func includeIngressFlags(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&name, "name", "n", "name", "The name of the ingress")
+	cmd.Flags().StringVarP(&ingressclass, "ingressclass", "c", "", "IngressClassName")
+	cmd.Flags().StringVarP(&servicename, "servicename", "s", "servicename", "The name of the destination service")
 	cmd.Flags().Int32VarP(&port, "port", "p", 80, "The main container port")
 }
 
