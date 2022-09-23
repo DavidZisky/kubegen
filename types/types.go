@@ -9,7 +9,7 @@ type TypeMeta struct {
 
 type ObjectMeta struct {
 	Name        string            `yaml:"name"`
-	Labels      map[string]string `yaml:"labels"`
+	Labels      map[string]string `yaml:"labels,omitempty"`
 	Annotations map[string]string `yaml:"annotations,omitempty"`
 }
 
@@ -93,17 +93,17 @@ type ServiceSpec struct {
 	Type           ServiceType       `yaml:"type"`
 	Ports          []ServicePort     `yaml:"ports"`
 	Selector       map[string]string `yaml:"selector"`
-	ClusterIP      string            `yaml:"clusterIP"`
-	LoadBalancerIP string            `yaml:"loadBalancerIP"`
-	ExternalIPs    []string          `yaml:"externalIPs"`
+	//ClusterIP      string            `yaml:"clusterIP"`
+	//LoadBalancerIP string            `yaml:"loadBalancerIP"`
+	//ExternalIPs    []string          `yaml:"externalIPs"`
 }
 
 type ServicePort struct {
-	Name       string   `yaml:"name"`
+	//Name       string   `yaml:"name"`
 	Protocol   Protocol `yaml:"protocol"`
 	Port       int32    `yaml:"port"`
 	TargetPort int32    `yaml:"targetPort"`
-	NodePort   int32    `yaml:"nodePort"`
+	//NodePort   int32    `yaml:"nodePort"`
 }
 
 type ServiceType string

@@ -15,11 +15,12 @@ var (
 	config   string
 	showVers bool
 
-	name     string // Deployment Name
-	replicas int32  // Number of Desired Pod Replicas
-	port     int32  // Container Port
-	image    string // Container Image
-	atype    string // Artefact type
+	name     		string // Deployment Name
+	replicas 		int32  // Number of Desired Pod Replicas
+	port     		int32  // Container Port
+	targetport  int32  // Container Target Port
+	image    		string // Container Image
+	atype    		string // Artefact type
 
 	// Populated during compile
 	version string

@@ -20,6 +20,12 @@ var (
 
 func service(cmd *cobra.Command, args []string) {
 
+	//fmt.Printf("%v", port)
+	if targetport == 0 {
+		targetport = port
+		fmt.Printf("%v", targetport)
+	}
+
 	d := Service{
 		TypeMeta: TypeMeta{
 			APIVersion: "v1",
@@ -29,13 +35,13 @@ func service(cmd *cobra.Command, args []string) {
 			Name: name + "-service",
 		},
 		Spec: ServiceSpec{
-			Type:     ServiceType(atype),
 			Selector: map[string]string{"app": name},
+			Type:     ServiceType(atype),
 			Ports: []ServicePort{
 				ServicePort{
 					Protocol:   "TCP",
 					Port:       port,
-					TargetPort: port,
+					TargetPort: targetport,
 				},
 			},
 		},
@@ -46,13 +52,14 @@ func service(cmd *cobra.Command, args []string) {
 		log.Fatalf("error: %v", err)
 	}
 
-	fmt.Printf("---\n%v\n", string(s))
+	fmt.Printf("---\n%v", string(s))
 }
 
 func includeServiceFlags(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&name, "name", "n", "name", "The name of the service")
 	cmd.Flags().StringVarP(&atype, "type", "t", "ClusterIP", "The type of the service")
-	cmd.Flags().Int32VarP(&port, "port", "p", 80, "The main container port")
+	cmd.Flags().Int32VarP(&port, "port", "p", 80, "Which port to expose on")
+	cmd.Flags().Int32VarP(&targetport, "targetport", "d", 0, "Which port container listens on")
 }
 
 func init() {
