@@ -118,6 +118,7 @@ type Ingress struct {
 
 // IngressSpec describes the Ingress the user wishes to exist.
 type IngressSpec struct {
+	IngressClass string `yaml:"ingressClassName,omitempty"`
 	Backend *IngressBackend `yaml:"backend,omitempty"`
 	TLS     []IngressTLS    `yaml:"tls,omitempty"`
 	Rules   []IngressRule   `yaml:"rules"`
