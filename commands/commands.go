@@ -26,21 +26,21 @@ var (
 
 	// RootCmd defineds the entry point command for the CLI
 	RootCmd = &cobra.Command{
-		Use:               "kstub",
-		Short:             "KStub is a Kubernetes manifests generator",
+		Use:               "kubegen",
+		Short:             "simple Kubernetes manifests generator",
 		Long:              ``,
 		SilenceErrors:     true,
 		SilenceUsage:      true,
 		PersistentPreRunE: readConfig,
 		PreRunE:           preFlight,
-		RunE:              runKStub,
+		RunE:              runkubegen,
 	}
 )
 
 func preFlight(cmd *cobra.Command, args []string) error {
 	// if --version is passed print the version info
 	if showVers {
-		fmt.Printf("kstube %s (%s)\n", version, commit)
+		fmt.Printf("kubegene %s (%s)\n", version, commit)
 		return fmt.Errorf("")
 	}
 
@@ -53,12 +53,12 @@ func preFlight(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-func runKStub(cmd *cobra.Command, args []string) error {
+func runkubegen(cmd *cobra.Command, args []string) error {
 	// convert the log level
 	logLvl := lumber.LvlInt(viper.GetString("log-level"))
 
 	// configure the logger
-	lumber.Prefix("[kstub]")
+	lumber.Prefix("[kubegen]")
 	lumber.Level(logLvl)
 
 	// fall back on default help if no args/flags are passed
