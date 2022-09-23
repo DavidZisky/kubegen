@@ -24,8 +24,13 @@ type PodSpec struct {
 	ImagePullSecrets []LocalObjectReference `yaml:"imagePullSecrets,omitempty"`
 }
 
+type TemplateMeta struct {
+	Labels      map[string]string `yaml:"labels"`
+	Annotations map[string]string `yaml:"annotations,omitempty"`
+}
+
 type PodTemplate struct {
-	ObjectMeta `yaml:"metadata"`
+	TemplateMeta `yaml:"metadata"`
 	Spec       PodSpec `yaml:"spec"`
 }
 
@@ -44,7 +49,7 @@ type Deployment struct {
 type Container struct {
 	Name            string               `yaml:"name"`
 	Image           string               `yaml:"image"`
-	Command         []string             `yaml:"command"`
+	Command         []string             `yaml:"command,omitempty"`
 	Args            []string             `yaml:"args,omitempty"`
 	WorkingDir      string               `yaml:"workingDir,omitempty"`
 	Env             []EnvVar             `yaml:"env,omitempty"`
@@ -62,11 +67,11 @@ type EnvVar struct {
 }
 
 type ContainerPort struct {
-	Name          string
-	HostPort      int32    `yaml:"hostPort"`
+	//Name          string
+	//HostPort      int32    `yaml:"hostPort"`
 	ContainerPort int32    `yaml:"containerPort"`
-	Protocol      Protocol `yaml:"protocol"`
-	HostIP        string   `yaml:"hostIP"`
+	//Protocol      Protocol `yaml:"protocol,omitempty"`
+	//HostIP        string   `yaml:"hostIP,omitempty"`
 }
 
 type Protocol string

@@ -36,19 +36,17 @@ func deployment(cmd *cobra.Command, args []string) {
 			},
 			Replicas: replicas,
 			Template: PodTemplate{
-				ObjectMeta: ObjectMeta{
+				TemplateMeta: TemplateMeta{
 					Labels: map[string]string{"app": name},
 				},
 				Spec: PodSpec{
 					Containers: []Container{
 						Container{
 							Name:  name,
-							Image: name + ":latest",
+							Image: image,
 							Ports: []ContainerPort{
 								ContainerPort{
 									ContainerPort: port,
-									HostPort:      port,
-									Name:          name + "-port",
 								},
 							},
 						},
@@ -63,11 +61,12 @@ func deployment(cmd *cobra.Command, args []string) {
 		log.Fatalf("error: %v", err)
 	}
 
-	fmt.Printf("---\n%v\n", string(s))
+	fmt.Printf("---\n%v", string(s))
 }
 
 func includeDeploymentFlags(cmd *cobra.Command) {
-	cmd.Flags().StringVarP(&name, "name", "n", "name", "The name of the deployment")
+	cmd.Flags().StringVarP(&name, "name", "n", "example", "The name of the deployment")
+	cmd.Flags().StringVarP(&image, "image", "i", "busybox", "Container image")
 	cmd.Flags().Int32VarP(&replicas, "replicas", "r", 1, "The number of desired pod replicas")
 	cmd.Flags().Int32VarP(&port, "port", "p", 80, "The main container port")
 
