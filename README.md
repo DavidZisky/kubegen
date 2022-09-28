@@ -4,7 +4,7 @@ kubegen is a simple command line Kubernetes manifest generator. Instead of copy&
 
 ## Installation
 
-Run `go install github.com/DavidZisky/kubegen`
+Run `go install github.com/DavidZisky/kubegen@latest`
 
 ## Usage
 
